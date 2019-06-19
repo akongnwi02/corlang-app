@@ -1,6 +1,8 @@
 {
   "name": "corlangApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "7afbca3f"
 }
