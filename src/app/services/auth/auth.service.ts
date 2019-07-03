@@ -28,6 +28,7 @@ export class AuthService {
               password: password
           }).pipe(
               tap(token => {
+                  console.log('token', token);
                   this.storage.setItem('token', token)
                       .then(
                           () => {

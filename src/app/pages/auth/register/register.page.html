@@ -39,7 +39,7 @@
       <ion-input formControlName="email" type="email"></ion-input>
       <ion-note color="danger" *ngIf="email.touched && email.invalid">
         <div *ngIf="email.errors.required">Email is required</div>
-        <div *ngIf="email.errors.email">Email is invalid</div>
+        <div *ngIf="email.errors.email || email.errors.pattern">Email is invalid</div>
       </ion-note>
     </ion-item>
 
@@ -55,9 +55,9 @@
     <ion-item>
       <ion-label position="floating">Confirm Password*</ion-label>
       <ion-input formControlName="password_confirmation" type="password"></ion-input>
-      <ion-note color="danger" *ngIf="confirmPassword.touched && confirmPassword.invalid">
-        <div *ngIf="confirmPassword.errors.required">Confirm Password is required</div>
-        <div *ngIf="form.errors.passwordsDontMatch">Confirm Password should match with Password</div>
+      <ion-note color="danger" *ngIf="confirmPassword.invalid">
+        <div *ngIf="confirmPassword.touched && confirmPassword.errors.required">Confirm Password is required</div>
+        <div *ngIf="confirmPassword.errors.passwordsDontMatch">Confirm Password should match with Password</div>
       </ion-note>
     </ion-item>
 

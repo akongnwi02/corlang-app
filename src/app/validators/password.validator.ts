@@ -9,10 +9,6 @@ export class PasswordValidator {
             control.get('password_confirmation').setErrors({
                 passwordsDontMatch: true
             });
-        } else {
-            control.get('password_confirmation').setErrors({
-                passwordsDontMatch: false
-            });
         }
     }
 }

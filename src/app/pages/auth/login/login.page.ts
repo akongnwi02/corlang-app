@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../../services/auth/auth.service";
 import {ModalController, NavController} from "@ionic/angular";
 import {AlertService} from "../../../services/alerts/alert.service";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
@@ -20,8 +21,10 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  dismissRegister() {
-      this.modalController.dismiss();
-  }
-
+    login() {
+        this.authService.login(
+            this.form.value.email,
+            this.form.value.password
+        );
+    }
 }

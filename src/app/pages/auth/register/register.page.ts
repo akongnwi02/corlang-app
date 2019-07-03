@@ -39,12 +39,13 @@ export class RegisterPage implements OnInit {
                 Validators.maxLength(30),
             ]],
 
-            email: ['',[
-                Validators.email,
-                Validators.required,
-                Validators.minLength(3),
-                Validators.maxLength(50),
-            ]],
+                email: ['', [
+                    Validators.email,
+                    Validators.required,
+                    Validators.minLength(3),
+                    Validators.maxLength(50),
+                    Validators.pattern("^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$")
+                ]],
 
             password: ['',[
                 Validators.required,
@@ -61,7 +62,8 @@ export class RegisterPage implements OnInit {
     }
 
     register() {
-        this.authService.register(this.form.value.first_name,
+        this.authService.register(
+            this.form.value.first_name,
             this.form.value.last_name,
             this.form.value.email,
             this.form.value.password).subscribe(
@@ -70,9 +72,13 @@ export class RegisterPage implements OnInit {
                 this.alertService.presentToast(`Account created successfully`);
             },
             error => {
-                console.log('error.error', error.error);
+                console.log('error.error', error);
 
                 if(error instanceof  HttpErrorResponse) {
+                    if (error.status === 0) {
+                        this.alertService.presentToast('Could not connect to the server');
+                    }
+
                     if (error.error.message) {
                         this.form.setErrors({
                             hasServerError: {
@@ -109,7 +115,7 @@ export class RegisterPage implements OnInit {
                 }
             },
             () => {
-                // this.navCtrl.navigateRoot('/home');
+                this.navCtrl.navigateRoot('/home');
             }
         );
     }
